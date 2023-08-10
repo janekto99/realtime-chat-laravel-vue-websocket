@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\MessageController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\Facades\Route;
@@ -19,3 +21,7 @@ Broadcast::routes(['middleware' => ['auth:sanctum']]);
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::resource('users', UserController::class);
+
+Route::post('message/create', [MessageController::class, 'sendMessage']);

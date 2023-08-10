@@ -1,6 +1,6 @@
 <script setup>
 import {useAuthStore} from "@/stores/auth";
-import {reactive} from "vue";
+import {onMounted, reactive} from "vue";
 
 const authStore = useAuthStore()
 
@@ -9,6 +9,11 @@ let auth = reactive({
   password: '',
 })
 
+onMounted(() => {
+  axios.get('/api/users').then((res) => {
+    console.log(res)
+  })
+})
 </script>
 
 <template>

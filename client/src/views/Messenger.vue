@@ -4,10 +4,6 @@ import SearchBar from '../components/userBar/SearchBar.vue'
 import SendMessageBar from '../components/chatBar/SendMessageBar.vue'
 import DisplayMessages from '../components/chatBar/DisplayMessages.vue'
 import ActionNav from '../components/chatBar/ActionNav.vue'
-
-Echo.private('chatFriends').listen('MessageEvent', (e) => {
-  console.log(e)
-})
 </script>
 
 <template>
