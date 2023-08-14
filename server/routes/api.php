@@ -22,6 +22,12 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::resource('users', UserController::class);
 
-Route::post('message/create', [MessageController::class, 'sendMessage']);
+Route::middleware('auth:sanctum')->group(function(){
+    Route::resource('users', UserController::class);
+    Route::post('message/create', [MessageController::class, 'sendMessage']);
+
+});
+
+Route::post('messages', [MessageController::class, 'getUserChat']);
+

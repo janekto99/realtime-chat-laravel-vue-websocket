@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -13,7 +14,9 @@ class UserController extends Controller
      */
     public function index(): Collection
     {
-        return User::all();
+        return User::query()
+            ->where('id', '!=', Auth::id())
+            ->get();
     }
 
     /**

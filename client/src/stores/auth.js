@@ -4,6 +4,7 @@ import router from "@/router";
 
 export const useAuthStore = defineStore('auth', {
     state: () => ({
+        authId: parseInt(localStorage.getItem('authId')) ?? null,
         name: null,
         email: null,
         errors: []
@@ -65,6 +66,7 @@ export const useAuthStore = defineStore('auth', {
                 const response = await axios.get('/api/user')
                 this.name = response.data.name
                 this.email = response.data.email
+                localStorage.setItem('authId', response.data.id)
 
                 return response.status
             } catch (error) {
@@ -76,6 +78,7 @@ export const useAuthStore = defineStore('auth', {
             await axios.post("/logout")
             this.name = null
             this.email = null
+            localStorage.removeItem('authId')
 
             await router.push('/auth/login')
         },
@@ -95,77 +98,3 @@ export const useAuthStore = defineStore('auth', {
         }
     }
 })
-
-// export const useAuthStore = defineStore('auth', {
-//
-//     state: () => ({
-//         authUser: null,
-//         authErrors: [],
-//         authStatus: null,
-//     }),
-//
-//     actions: {
-//         async getToken() {
-//             await axios.get("/sanctum/csrf-cookie");
-//         },
-//
-//         async getUser() {
-//             await axios.get('/api/user').then((res) => {
-//                 console.log(res.data)
-//             })
-//         },
-//
-//         getCookieToken() {
-//             let token = ''
-//             let cookies = document.cookie.split('; ')
-//             for (let i = 0; i < cookies.length; i++) {
-//                 const cookie = cookies[i].split('=')
-//                 console.log(cookie)
-//                 if (cookie[0] === 'XSRF-TOKEN') {
-//                     token = cookie[1]
-//                     break
-//                 }
-//             }
-//             return token
-//         },
-//
-//         async register(name, email, password, confirmPassword) {
-//             await this.getToken()
-//             try {
-//                 await axios.post('/register', {
-//                     name: name,
-//                     email: email,
-//                     password: password,
-//                     password_confirmation: confirmPassword
-//                 })
-//                 this.isLoggedIn = true
-//                 localStorage.setItem('user', this.getCookieToken())
-//             } catch (error) {
-//                 console.log(error)
-//             }
-//
-//         },
-//
-//         async login(email, password) {
-//             await this.getToken()
-//             try {
-//                 await axios.post('/login', {
-//                     email: email,
-//                     password: password,
-//                 }).then((res) => {
-//                     // axios.defaults.headers.common['Authorization'] = 'Bearer ' + this.getCookieToken()
-//                     // this.isLoggedIn = true
-//                     // localStorage.setItem('token', this.getCookieToken())
-//                     router.push('/')
-//                 })
-//             } catch (error) {
-//                 console.log(error)
-//             }
-//         },
-//
-//         async logout() {
-//             this.isLoggedIn = false
-//             localStorage.setItem('isLoggedIn', this.isLoggedIn)
-//         }
-//     },
-// })

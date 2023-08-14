@@ -8,12 +8,6 @@ let auth = reactive({
   email: '',
   password: '',
 })
-
-onMounted(() => {
-  axios.get('/api/users').then((res) => {
-    console.log(res)
-  })
-})
 </script>
 
 <template>
