@@ -52,7 +52,7 @@ export const useMessengerStore = defineStore('messenger', {
         },
 
         addSmile(smile) {
-            this.message += `:${smile}:`
+            this.message += `${smile}`
         },
 
         setChatColor(color) {

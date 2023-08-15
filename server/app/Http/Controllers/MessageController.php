@@ -30,8 +30,10 @@ class MessageController extends Controller
         $userId = $request->input('userId');
 
         return Message::query()
-            ->where('user_id', $authId)
-            ->orWhere('user_id', $userId)
+            ->where([
+                ['user_id', $authId],
+                ['chat_user_id', $userId],
+            ])
             ->get();
     }
 }
