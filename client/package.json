@@ -12,6 +12,7 @@
     "laravel-echo": "^1.15.2",
     "pinia": "^2.1.4",
     "pusher-js": "^8.3.0",
+    "simple-peer": "^9.11.1",
     "vue": "^3.3.4",
     "vue-router": "^4.2.4"
   },

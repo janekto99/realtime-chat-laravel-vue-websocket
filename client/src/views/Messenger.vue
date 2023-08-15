@@ -4,9 +4,9 @@ import SearchBar from '../components/userBar/SearchBar.vue'
 import SendMessageBar from '../components/chatBar/SendMessageBar.vue'
 import DisplayMessages from '../components/chatBar/DisplayMessages.vue'
 import ActionNav from '../components/chatBar/ActionNav.vue'
+import {nextTick, onBeforeMount, ref, watchEffect} from "vue";
+
 import {useMessengerStore} from "@/stores/messenger";
-import {nextTick, onBeforeMount, onMounted, ref, watchEffect} from "vue";
-import axios from "axios";
 import {useAuthStore} from "@/stores/auth";
 
 const messengerStore = useMessengerStore()
@@ -15,8 +15,8 @@ const authStore = useAuthStore()
 const users = ref()
 const scroll = ref()
 
-Echo.private('message').listen('MessageEvent', (message) => {
-  if (message.message.user_id !== authStore.authId) {
+Echo.private(`message.${authStore.authId}`).listen('MessageEvent', (message) => {
+  if (message.message.user_id === messengerStore.userId) {
     messengerStore.messages.push(message.message)
     messengerStore.scrollDown = true
   }
@@ -45,7 +45,6 @@ onBeforeMount(() => {
           <Contact @click="messengerStore.selectChat(user)"
                    :letter="user.name.charAt(0)"
                    :name="user.name"
-                   last-message="Toto je poslední zpráva.."
                    :user-id="user.id"/>
         </div>
       </div>

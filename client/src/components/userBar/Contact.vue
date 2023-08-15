@@ -7,7 +7,6 @@ const messengerStore = useMessengerStore()
 const contact = defineProps({
   letter: String,
   name: String,
-  lastMessage: String,
   userId: Number
 })
 </script>
@@ -23,7 +22,6 @@ const contact = defineProps({
 
     <div class="flex flex-col justify-center ml-2">
       <p class="font-semibold">{{ contact.name }}</p>
-      <p>{{ contact.lastMessage }}</p>
     </div>
   </div>
 </template>
