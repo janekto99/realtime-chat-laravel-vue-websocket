@@ -1,6 +1,5 @@
 <script setup>
-import {useMessengerStore} from "@/stores/messenger";
-import {onMounted} from "vue";
+import {useMessengerStore} from "@/stores/messenger"
 
 const messengerStore = useMessengerStore()
 
@@ -12,10 +11,10 @@ const contact = defineProps({
 </script>
 
 <template>
-  <div :class="['flex w-full h-16 text-xs mt-1 rounded-lg cursor-pointer',
+  <div :class="['flex w-full h-8 lg:h-16 text-xs mt-1 rounded-lg cursor-pointer',
    userId === messengerStore.userId && 'bg-indigo-100']">
     <div class="flex items-center">
-      <div class="flex justify-center items-center h-12 w-12 mx-0.5 rounded-full bg-gray-300">
+      <div class="hidden lg:flex justify-center items-center h-12 w-12 mx-0.5 rounded-full bg-gray-300">
         <p class="text-2xl">{{ contact.letter }}</p>
       </div>
     </div>

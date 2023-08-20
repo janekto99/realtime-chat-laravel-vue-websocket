@@ -24,15 +24,18 @@ class MessageController extends Controller
         broadcast(new MessageEvent($newMessage));
     }
 
-    public function getUserChat(Request $request): Collection|array
+    public function getUserChat(Request $request): Collection
     {
-        $authId = Auth::id();
         $userId = $request->input('userId');
 
         return Message::query()
             ->where([
-                ['user_id', $authId],
+                ['user_id', Auth::id()],
                 ['chat_user_id', $userId],
+            ])
+            ->orWhere([
+                ['user_id', $userId],
+                ['chat_user_id', Auth::id()],
             ])
             ->get();
     }

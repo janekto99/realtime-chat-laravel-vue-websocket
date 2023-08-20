@@ -20,7 +20,6 @@ export const useAuthStore = defineStore('auth', {
             let cookies = document.cookie.split('; ')
             for (let i = 0; i < cookies.length; i++) {
                 const cookie = cookies[i].split('=')
-                console.log(cookie)
                 if (cookie[0] === 'XSRF-TOKEN') {
                     token = cookie[1]
                     break

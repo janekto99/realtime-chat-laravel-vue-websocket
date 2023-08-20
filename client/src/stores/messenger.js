@@ -1,11 +1,10 @@
 import {defineStore} from "pinia"
 import axios from "axios"
-import router from "@/router";
-import {computed, ref, watchEffect} from "vue";
 
 export const useMessengerStore = defineStore('messenger', {
     state: () => ({
         userId: null,
+        authId: parseInt(localStorage.getItem('authId')) ?? null,
         userName: null,
         users: [],
         message: '',
@@ -13,6 +12,8 @@ export const useMessengerStore = defineStore('messenger', {
         chatColor: 'bg-indigo-300',
         searchBar: '',
         scrollDown: false,
+        smilesBar: false,
+        colorsBar: false,
     }),
 
     getters: {
@@ -24,12 +25,9 @@ export const useMessengerStore = defineStore('messenger', {
     actions: {
         sendMessage() {
             if (this.userId && this.message !== '') {
-                const authId = parseInt(localStorage.getItem('authId'))
-                this.messages.push({message: this.message, user_id: authId})
+                this.messages.push({message: this.message, user_id: this.authId})
                 this.scrollDown = true
-                axios.post('/api/message/create', {message: this.message, id: this.userId}).then((res) => {
-
-                })
+                axios.post('/api/message/create', {message: this.message, id: this.userId})
                 this.message = ''
             }
         },
@@ -40,11 +38,12 @@ export const useMessengerStore = defineStore('messenger', {
             })
         },
 
-        selectChat(user) {
+        async selectChat(user) {
+            this.messages = []
             this.userId = user.id
             this.userName = user.name
             localStorage.setItem('userId', this.userId)
-            axios.post('api/messages', {userId: this.userId})
+            await axios.post('api/messages', {userId: this.userId})
                 .then((res) => {
                     this.messages = res.data
                     this.scrollDown = true
@@ -61,6 +60,15 @@ export const useMessengerStore = defineStore('messenger', {
 
         scrollBottom(element) {
             element.scrollTop = element.scrollHeight
+        },
+
+        switchSmile() {
+            this.smilesBar = !this.smilesBar
+        },
+
+        switchColor() {
+            this.colorsBar = !this.colorsBar
         }
     },
+
 })

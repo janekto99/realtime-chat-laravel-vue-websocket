@@ -1,6 +1,5 @@
 <script setup>
-import {useMessengerStore} from "@/stores/messenger";
-import {computed, watch, watchEffect} from "vue";
+import {useMessengerStore} from "@/stores/messenger"
 
 const messengerStore = useMessengerStore()
 </script>

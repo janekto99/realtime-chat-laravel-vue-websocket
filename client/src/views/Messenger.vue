@@ -1,9 +1,9 @@
 <script setup>
-import Contact from '../components/userBar/Contact.vue'
-import SearchBar from '../components/userBar/SearchBar.vue'
-import SendMessageBar from '../components/chatBar/SendMessageBar.vue'
-import DisplayMessages from '../components/chatBar/DisplayMessages.vue'
-import ActionNav from '../components/chatBar/ActionNav.vue'
+import Contact from '../components/Contact.vue'
+import SearchBar from '../components/SearchBar.vue'
+import SendMessageBar from '../components/SendMessageBar.vue'
+import DisplayMessages from '../components/DisplayMessages.vue'
+import ActionNav from '../components/ActionNav.vue'
 import {nextTick, onBeforeMount, ref, watchEffect} from "vue";
 
 import {useMessengerStore} from "@/stores/messenger";
@@ -12,7 +12,6 @@ import {useAuthStore} from "@/stores/auth";
 const messengerStore = useMessengerStore()
 const authStore = useAuthStore()
 
-const users = ref()
 const scroll = ref()
 
 Echo.private(`message.${authStore.authId}`).listen('MessageEvent', (message) => {
@@ -38,8 +37,8 @@ onBeforeMount(() => {
 
 <template>
   <div class="h-screen w-screen">
-    <div class="flex h-full items-end py-1">
-      <div class="flex flex-col basis-1/4 xl:basis-1/6 h-full border-2 px-0.5 mx-1 rounded-lg">
+    <div class="relative flex h-full items-end py-1">
+      <div class="bg-white lg:flex flex-col lg:basis-1/4 xl:basis-1/6 h-full border-2 px-0.5 mx-1 rounded-lg">
         <SearchBar/>
         <div @change="" v-for="user in messengerStore.getFilteredUsers" :key="user.id" class="overflow-y-auto">
           <Contact @click="messengerStore.selectChat(user)"
@@ -49,7 +48,7 @@ onBeforeMount(() => {
         </div>
       </div>
 
-      <div class="flex flex-col basis-3/4 xl:basis-5/6 h-full">
+      <div class="flex flex-col w-full lg:basis-3/4 xl:basis-5/6 h-full">
         <div v-if="messengerStore.userId !== null">
           <ActionNav/>
         </div>
@@ -57,7 +56,7 @@ onBeforeMount(() => {
           <DisplayMessages v-if="messengerStore.userId !== null"/>
           <div class="flex justify-center items-center h-full text-xl font-semibold" v-else>
             <p>
-              Please, choose user for chat
+              Please select a user to start a chat
             </p>
           </div>
         </div>

@@ -23,7 +23,7 @@ let auth = reactive({
                       focus:outline-none focus:ring-0 peer rounded-lg"
                placeholder=" "
                required/>
-        <p v-if="authStore.errors.name" class="text-red-600 text-xs text-center mt-1">{{authStore.errors.name[0]}}</p>
+        <p v-if="authStore.errors.name" class="text-red-600 text-xs text-center mt-1">{{ authStore.errors.name[0] }}</p>
         <label class="absolute ml-2 px-1 text-sm text-white bg-[#1f2a3d]
                duration-300 transform -translate-y-6 scale-75 top-3 z-10 hover:-z-10 peer-focus:z-10 peer-focus:px-1 origin-[0] peer-focus:left-0
                 peer-focus:text-[#06ddc4] peer-placeholder-shown:scale-100
@@ -38,7 +38,8 @@ let auth = reactive({
                       focus:outline-none focus:ring-0 peer rounded-lg"
                placeholder=" "
                required/>
-        <p v-if="authStore.errors.email" class="text-red-600 text-xs text-center mt-1">{{authStore.errors.email[0]}}</p>
+        <p v-if="authStore.errors.email" class="text-red-600 text-xs text-center mt-1">
+          {{ authStore.errors.email[0] }}</p>
         <label class="absolute ml-2 px-1 text-sm text-white bg-[#1f2a3d]
                duration-300 transform -translate-y-6 scale-75 top-3 z-10 hover:-z-10 peer-focus:z-10 peer-focus:px-1 origin-[0] peer-focus:left-0
                 peer-focus:text-[#06ddc4] peer-placeholder-shown:scale-100
@@ -53,7 +54,8 @@ let auth = reactive({
                       focus:outline-none focus:ring-0 peer rounded-lg"
                placeholder=" "
                required/>
-        <p v-if="authStore.errors.password" class="text-red-600 text-xs text-center mt-1">{{authStore.errors.password[0]}}</p>
+        <p v-if="authStore.errors.password" class="text-red-600 text-xs text-center mt-1">
+          {{ authStore.errors.password[0] }}</p>
         <label class="absolute ml-2 px-1 text-sm text-white bg-[#1f2a3d]
                duration-300 transform -translate-y-6 scale-75 top-3 z-10 hover:-z-10 peer-focus:z-10 peer-focus:px-1 origin-[0] peer-focus:left-0
                 peer-focus:text-[#06ddc4] peer-placeholder-shown:scale-100
@@ -63,12 +65,13 @@ let auth = reactive({
       </div>
 
       <div class="relative z-0 group m-auto my-2">
-        <input v-model="auth.password_confirmation" type="password"
+        <input @click="authStore.login(auth)" v-model="auth.password_confirmation" type="password"
                class="flex w-80 py-2 pl-1 text-gray-100 bg-transparent border focus:border-[#06ddc4] appearance-none
                       focus:outline-none focus:ring-0 peer rounded-lg"
                placeholder=" "
                required/>
-        <p v-if="authStore.errors.password" class="text-red-600 text-xs text-center mt-1">{{authStore.errors.password[0]}}</p>
+        <p v-if="authStore.errors.password" class="text-red-600 text-xs text-center mt-1">
+          {{ authStore.errors.password[0] }}</p>
         <label class="absolute ml-2 px-1 text-sm text-white bg-[#1f2a3d]
                duration-300 transform -translate-y-6 scale-75 top-3 z-10 hover:-z-10 peer-focus:z-10 peer-focus:px-1 origin-[0] peer-focus:left-0
                 peer-focus:text-[#06ddc4] peer-placeholder-shown:scale-100
