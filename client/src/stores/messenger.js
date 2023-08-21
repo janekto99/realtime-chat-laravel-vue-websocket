@@ -14,6 +14,7 @@ export const useMessengerStore = defineStore('messenger', {
         scrollDown: false,
         smilesBar: false,
         colorsBar: false,
+        messageLoading: false
     }),
 
     getters: {
@@ -43,10 +44,12 @@ export const useMessengerStore = defineStore('messenger', {
             this.userId = user.id
             this.userName = user.name
             localStorage.setItem('userId', this.userId)
+            this.messageLoading = true
             await axios.post('api/messages', {userId: this.userId})
                 .then((res) => {
                     this.messages = res.data
                     this.scrollDown = true
+                    this.messageLoading = false
                 })
         },
 
