@@ -28,3 +28,5 @@
 ### Go to the http://localhost:3000/
 
 For testing register at least 2 users
+
+![img.png](img.png)
