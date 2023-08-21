@@ -2,7 +2,7 @@
 - Setup your database config in server/.env file
 
 - Go to the folder named server
-> cd messenger-laravel-vue/server
+> cd realtime-chat-laravel-vue-websocket-master/server
 
 - Start artisan server
 > php artisan serve
@@ -14,7 +14,7 @@
 > php artisan migrate
 
 - Go to the folder named client
-> cd messenger-laravel-vue/client
+> cd realtime-chat-laravel-vue-websocket-master/client
 
 - Start npm
 > npm run dev
