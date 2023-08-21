@@ -1,6 +1,6 @@
 ## How to run project
 
-Go to the project server folder
+Go to the folder named server
 > cd messenger-laravel-vue/server
 
 Start artisan server
@@ -12,10 +12,12 @@ Start websocket server
 Make a migration
 > php artisan migrate
 
-Go to the project client folder
+Go to the folder named client
 > cd messenger-laravel-vue/client
 
-Start npm dev
+Start npm
 > npm run dev
 
-Go to the http://localhost:3000/
+### Go to the http://localhost:3000/
+
+For testing register at least 2 users
